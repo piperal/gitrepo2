@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minu veebisait</title>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <img alt="bänner lehel" src="vp_banner_2025_TA.jpg" />
+    <h1>Hello World! by: Roland</h1>
+    <h2>Tere maailm!</h2>
+    <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
+    <hr />
+	<ul>
+	<li><a href="/timenow">Praegune Aeg</a></li>
+	<li><a href="/">koju</a></li>
+	</ul>
+    <hr />
+	<div>
+		<h2>Nädalapäev: <%= vanasonad.forEach(function(vanasona)){
+		<p>Sona: <%= vanasona%></p>
+		 <% }); %> 
+		}%></h2>
+	</div>
+</body>
+</html>
