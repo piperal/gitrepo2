@@ -14,20 +14,14 @@
     <h2>Tere maailm!</h2>
     <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
     <hr />
-    <ul>
-        <a href="/">koju</a>
-    </ul>
+	<a href="/">koju</a>
     <hr />
-    <div>
-        <ul>
-            <% vanasonad.forEach(function(vanasona){ %>
-                <li>
-                    <%= vanasona %>
-                </li>
-                <% }); %>
-        </ul>
-    </div>
-    <hr />
+	<div>
+	<ul>
+	<% vanasonad.forEach(function(vanasona){ %>
+		<li><%= vanasona %></li>
+	<% }); %>
+	</ul>
+	</div>
 </body>
-
 </html>
