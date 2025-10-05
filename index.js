@@ -20,14 +20,30 @@ app.get("/", (req,res)=>{
 	res.render('index')
 })
 
+
 app.get("/visit", (req,res)=>{
-	res.render("userinput");
-	fs.open("./külalised.txt", "a", (err, file)=>{}))
-	
-	
+	res.render('userinput')
+})
+
 	
 app.post("/visit", (req,res)=>{
 	console.log(req.body)
+	fs.open("./public/visitlog.txt", "a",(err,file)=>{
+		if(err){
+			console.log(err);
+			res.send("Tekkis viga")}
+		else{
+			fs.appendFile("./public/visitlog.txt", req.body.nameInput + ";", (err)=>{
+				if(err){
+					throw(err)
+				}
+				else{
+					console.log("salvestatud");
+					res.render("userinput")
+				}
+			})
+		}
+	})
 })
 
 
@@ -39,14 +55,15 @@ app.get("/timenow", (req,res)=>{
 })
 
 app.get("/vanasonad", (req,res)=>{
+	let vanasonad = [];
 	fs.readFile(textRef,"utf8", (err,data)=>{
 		if(err)
 			res.render("viga")
 		else{
-	res.render('vanasonad', {
-		fullTime: dateTime.fullTime(),
-		fullDate: dateTime.fullDate(),
-		vanasonad: listItems
+			vanasonad = data.split(";")
+		console.log(vanasonad)
+		res.render('vanasonad', {
+		vanasonad: vanasonad
 	})
 		}
 	})

@@ -22,7 +22,9 @@ p,h2{
 }
 
 a{
-	color:white
+	color:white;
+	font-weight:bold;
+	text-align:center;
 }
 
 a:hover{
