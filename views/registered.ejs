@@ -15,17 +15,13 @@
     <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
     <hr />
     <ul>
-        <a href="/">koju</a>
+        <a href="/">Koju</a><br>
+        <a href="/visit">Pane ennast kirja</a><br>
+        <a href="/visitors">Külas käinud iskikud</a>
     </ul>
     <hr />
     <div>
-        <ul>
-            <% vanasonad.forEach(function(vanasona){ %>
-                <li>
-                    <%= vanasona %>
-                </li>
-                <% }); %>
-        </ul>
+        <%= fName + " " + lName%>, olete registreeritud!
     </div>
     <hr />
 </body>
