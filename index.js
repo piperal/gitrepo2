@@ -33,15 +33,34 @@ app.post("/visit", (req,res)=>{
 			console.log(err);
 			res.send("Tekkis viga")}
 		else{
-			fs.appendFile("./public/visitlog.txt", req.body.nameInput + ";", (err)=>{
+			fs.appendFile("./public/visitlog.txt", req.body.nameInput + " " + req.body.lastNameInput +", " + dateTime.fullDate() + " " +  dateTime.fullTime() + ";", (err)=>{
 				if(err){
 					throw(err)
 				}
 				else{
 					console.log("salvestatud");
-					res.render("userinput")
+					res.render("registered", {
+						fName: req.body.nameInput,
+						lName: req.body.lastNameInput
+					})
 				}
 			})
+		}
+	})
+})
+
+app.get("/visitors", (req,res)=>{
+	let visitors = [];
+		fs.readFile("./public/visitlog.txt","utf8",(err,file)=>{
+		if(err){
+			console.log(err);
+			res.send("Tekkis viga")}
+		else{
+			visitors = file.split(";");
+			res.render("visitors",{
+					visitors: visitors
+			});
+
 		}
 	})
 })
