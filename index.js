@@ -4,10 +4,21 @@ const app = express()
 const fs = require("fs")
 const textRef = "./vanasonad.txt"
 const listItems = require("./listItems")
+const mysql = require("mysql2")
 const port = 5114
 const dateTime = require("./dateET.js")
 let timeNow = new Date();
 const bodyparser = require('body-parser')
+
+
+const conn = mysql.createConnection({
+	host: "greeny.cs.tlu.ee",
+	user: "if25",
+	password: "DTI2025",
+	database: "if25_inga_petuhhov_TA"
+});
+
+
 //add viewengine
 app.set("view engine", "ejs")
 
