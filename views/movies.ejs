@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minu veebisait</title>
-    <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -15,7 +14,10 @@
     <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
     <hr />
     <ul>
-        <a href="/">koju</a>
+        <a href="/">koju</a><br>
+		<a href="/movies/people">näitlejad</a><br>
+		<a href="/movies/new">Lisa uus amet</a><br>
+		<a href="/movies/pos">Vaata ameteid</a><br>
     </ul>
     <hr />
     <div>
@@ -24,6 +26,7 @@
                     <%= movie.title %>
 					<%=movie.production_year%>
                 </p>
+				<hr/>
                 <% }); %>
     </div>
     <hr />

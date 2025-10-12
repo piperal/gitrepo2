@@ -22,7 +22,7 @@ const conn = mysql.createConnection({
 //add viewengine
 app.set("view engine", "ejs")
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyparser.urlencoded({extended:false}));
 
 console.log(listItems)
@@ -100,14 +100,36 @@ app.get("/vanasonad", (req,res)=>{
 })
 	
 
-app.get("/new", (req,res)=>{
-const sqlReq = "SELECT * FROM position";
+app.get("/movies/new", (req,res)=>{
+			res.render('position')
+})
+
+app.post("/movies/new", (req,res)=>{
+	console.log(req.body)
+	
+	const sqlReq = `INSERT INTO position VALUES (NULL,"${req.body.posName}","${req.body.posDesc}")`;
+	
 	conn.execute(sqlReq, (err, sqlres)=>{
 		if(err){
 			throw(err);
 		}
 		else {
-			res.render('position')
+			console.log("Salvestatud");
+			res.redirect("/movies/pos")
+		}
+	});
+})
+
+app.get("/movies/pos", (req,res)=>{
+	const sqlReq = "SELECT * FROM position";
+	conn.execute(sqlReq, (err, sqlres)=>{
+		if(err){
+			throw(err);
+		}
+		else {
+			res.render('positions',{
+				positions: sqlres
+			})
 			console.log(sqlres);
 		}
 	});
@@ -128,7 +150,7 @@ app.get("/movies",(req,res)=>{
 	});
 })
 
-app.get("/people", (req,res)=>{
+app.get("/movies/people", (req,res)=>{
 	const sqlReq = "SELECT * FROM person";
 	conn.execute(sqlReq, (err, sqlres)=>{
 		if(err){
@@ -143,21 +165,6 @@ app.get("/people", (req,res)=>{
 	});
 })
 
-app.post("/new", (req,res)=>{
-	console.log(req.body)
-	
-	const sqlReq = `INSERT INTO position VALUES (NULL,"${req.body.posName}","${req.body.posDesc}")`;
-	
-	conn.execute(sqlReq, (err, sqlres)=>{
-		if(err){
-			throw(err);
-		}
-		else {
-			console.log("Salvestatud");
-			res.redirect("/")
-		}
-	});
-})
 
 app.listen(port,()=>{
     console.log(`Server running on ${port}`)

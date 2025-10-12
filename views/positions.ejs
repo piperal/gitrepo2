@@ -14,17 +14,19 @@
     <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
     <hr />
     <ul>
-        <a><a href="/">Koju</a></a>
+        <a href="/movies">koju</a>
     </ul>
     <hr />
     <div>
-        <ul>
-            <% visitors.forEach(function(visitor){ %>
-                <li>
-                    <%= visitor %>
-                </li>
+            <% positions.forEach(function(position){ %>
+                <p>
+                    <%= position.position_name %>
+                </p>
+				<p>
+					<%= position.description %>
+				</p>
+				<hr />
                 <% }); %>
-        </ul>
     </div>
     <hr />
 </body>
