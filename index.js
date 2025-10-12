@@ -12,10 +12,10 @@ const bodyparser = require('body-parser')
 
 
 const conn = mysql.createConnection({
-	host: "greeny.cs.tlu.ee",
+	host: "localhost",
 	user: "if25",
 	password: "DTI2025",
-	database: "if25_inga_petuhhov_TA"
+	database: "if25_piperal"
 });
 
 
@@ -100,8 +100,63 @@ app.get("/vanasonad", (req,res)=>{
 })
 	
 
-app.get("/pood", (req,res)=>{
-	res.send("oled praegu e-poes!")
+app.get("/new", (req,res)=>{
+const sqlReq = "SELECT * FROM position";
+	conn.execute(sqlReq, (err, sqlres)=>{
+		if(err){
+			throw(err);
+		}
+		else {
+			res.render('position')
+			console.log(sqlres);
+		}
+	});
+})
+
+app.get("/movies",(req,res)=>{
+	const sqlReq = "SELECT * FROM movie";
+	conn.execute(sqlReq, (err, sqlres)=>{
+		if(err){
+			throw(err);
+		}
+		else {
+			console.log(sqlres)
+			res.render('movies',{
+				movies: sqlres
+			})
+		}
+	});
+})
+
+app.get("/people", (req,res)=>{
+	const sqlReq = "SELECT * FROM person";
+	conn.execute(sqlReq, (err, sqlres)=>{
+		if(err){
+			throw(err);
+		}
+		else {
+			res.render("people",{
+				people: sqlres
+			})
+			console.log(sqlres)
+		}
+	});
+})
+
+app.post("/new", (req,res)=>{
+	console.log(req.body)
+	
+	const sqlReq = `INSERT INTO position VALUES (NULL,"${req.body.posName}","${req.body.posDesc}")`;
+	
+	conn.execute(sqlReq, (err, sqlres)=>{
+		if(err){
+			throw(err);
+		}
+		else {
+			console.log("Salvestatud");
+			res.redirect("/")
+		}
+	});
 })
 
 app.listen(port,()=>{

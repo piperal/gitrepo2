@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minu veebisait</title>
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <img alt="bänner lehel" src="vp_banner_2025_TA.jpg" />
+    <h1>Hello World! by: Roland</h1>
+    <h2>Tere maailm!</h2>
+    <p>See on tehtud <a href="https://www.tlu.ee/">TLÜ</a> veebiprogrammeerimise kursusel, ÄGE leht!</p>
+    <hr />
+    <ul>
+        <a href="/">koju</a>
+    </ul>
+    <hr />
+    <div>
+            <% movies.forEach(function(movie){ %>
+                <p>
+                    <%= movie.title %>
+					<%=movie.production_year%>
+                </p>
+                <% }); %>
+    </div>
+    <hr />
+</body>
+
+</html>
