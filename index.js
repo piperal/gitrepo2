@@ -11,12 +11,7 @@ let timeNow = new Date();
 const bodyparser = require('body-parser')
 
 
-const conn = mysql.createConnection({
-	host: "localhost",
-	user: "if25",
-	password: "DTI2025",
-	database: "if25_piperal"
-});
+
 
 
 //add viewengine
@@ -76,7 +71,6 @@ app.get("/visitors", (req,res)=>{
 	})
 })
 
-
 app.get("/timenow", (req,res)=>{
 	res.render('kellaaeg', {
 		fullTime: dateTime.fullTime(),
@@ -98,73 +92,9 @@ app.get("/vanasonad", (req,res)=>{
 		}
 	})
 })
-	
 
-app.get("/movies/new", (req,res)=>{
-			res.render('position')
-})
-
-app.post("/movies/new", (req,res)=>{
-	console.log(req.body)
-	
-	const sqlReq = `INSERT INTO position VALUES (NULL,"${req.body.posName}","${req.body.posDesc}")`;
-	
-	conn.execute(sqlReq, (err, sqlres)=>{
-		if(err){
-			throw(err);
-		}
-		else {
-			console.log("Salvestatud");
-			res.redirect("/movies/pos")
-		}
-	});
-})
-
-app.get("/movies/pos", (req,res)=>{
-	const sqlReq = "SELECT * FROM position";
-	conn.execute(sqlReq, (err, sqlres)=>{
-		if(err){
-			throw(err);
-		}
-		else {
-			res.render('positions',{
-				positions: sqlres
-			})
-			console.log(sqlres);
-		}
-	});
-})
-
-app.get("/movies",(req,res)=>{
-	const sqlReq = "SELECT * FROM movie";
-	conn.execute(sqlReq, (err, sqlres)=>{
-		if(err){
-			throw(err);
-		}
-		else {
-			console.log(sqlres)
-			res.render('movies',{
-				movies: sqlres
-			})
-		}
-	});
-})
-
-app.get("/movies/people", (req,res)=>{
-	const sqlReq = "SELECT * FROM person";
-	conn.execute(sqlReq, (err, sqlres)=>{
-		if(err){
-			throw(err);
-		}
-		else {
-			res.render("people",{
-				people: sqlres
-			})
-			console.log(sqlres)
-		}
-	});
-})
-
+const moviesRouter = require("./routes/moviesRoutes.js")
+app.use("/movies",moviesRouter)
 
 app.listen(port,()=>{
     console.log(`Server running on ${port}`)
